@@ -9,12 +9,14 @@ namespace StatusExampleAPI.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class StatusExampleController : ControllerBase
     {
         /// <summary>
         /// Get the default HTTP status.
         /// </summary>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult Get()
         {
             return Ok();
@@ -30,6 +32,11 @@ namespace StatusExampleAPI.Controllers
         /// <response code="401">HTTP status Unauthorized</response>
         /// <response code="404">HTTP status NotFound</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult Get(int id)
         {
             return id switch
